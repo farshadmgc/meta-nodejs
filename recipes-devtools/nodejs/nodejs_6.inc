@@ -16,6 +16,8 @@ RPROVIDES_${PN} = "node"
 SRC_URI = "https://nodejs.org/dist/v${PV}/node-v${PV}.tar.gz;name=src \
            file://no-registry_6.x.patch"
 
+SRC_URI += "${@bb.utils.contains('GCCVERSION', '7.%', 'file://gcc_7_x_support.patch', '', d)}"
+
 S = "${WORKDIR}/node-v${PV}"
 
 # v8 errors out if you have set CCACHE
